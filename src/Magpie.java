@@ -12,6 +12,8 @@
  */
 public class Magpie
 {
+    // INSTANCE VARIABLES
+    private boolean knowsAboutPets = false;
 	/**
 	 * Get a default greeting 	
 	 * @return a greeting
@@ -30,23 +32,54 @@ public class Magpie
 	 */
 	public String getResponse(String statement)
 	{
-		String response = "";
-		if (statement.indexOf("no") >= 0)
-		{
-			response = "Why so negative?";
-		}
-		else if (statement.indexOf("mother") >= 0
-				|| statement.indexOf("father") >= 0
-				|| statement.indexOf("sister") >= 0
-				|| statement.indexOf("brother") >= 0)
-		{
-			response = "Tell me more about your family.";
-		}
-		else
-		{
-			response = getRandomResponse();
-		}
-		return response;
+            // TRIM AND EARLY TERMINATION
+            statement = statement.trim().toLowerCase();
+            if(statement.length() == 0) return "Hey, gimme something to work with";
+            
+            // blank response
+            String response = "";
+            
+            // STRING ANALYSIS
+            if (statement.indexOf("no") >= 0)
+            {
+                    response = "Why so negative?";
+            }
+            else if (statement.indexOf("mother") >= 0
+                    || statement.indexOf("father") >= 0
+                    || statement.indexOf("sister") >= 0
+                    || statement.indexOf("brother") >= 0)
+            {
+                response = "Tell me more about your family.";
+            }
+            else if (statement.indexOf("dog") >= 0
+                    || statement.indexOf("cat") >= 0){
+                if(!knowsAboutPets){
+                    response = "Wow, you have pets? Please tell me more!";
+                    knowsAboutPets = true;
+                }
+                else
+                    response = "I never get tired of talking about pets";
+
+            }
+            else if(statement.indexOf("mr. adiletta") >= 0
+                    || statement.indexOf("adiletta") >= 0
+                    || statement.indexOf("mr. a") >=0){
+                response = "Sounds like a solid mentor.";
+            }
+            else if(statement.indexOf("weej") >= 0){
+                response = "He's such a cheeser";
+            }
+            else if(statement.indexOf("java") >= 0){
+                response = "Sounds harder than Python";
+            }
+            else if(statement.indexOf("coffee") >= 0){
+                response = "The worst part of being a machine is the lack of coffee";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }
+            return response;
 	}
 	
 	/**
@@ -55,28 +88,35 @@ public class Magpie
 	 */
 	private String getRandomResponse()
 	{
-		final int NUMBER_OF_RESPONSES = 4;
-		double r = Math.random();
-		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
-		String response = "";
-		
-		if (whichResponse == 0)
-		{
-			response = "Interesting, tell me more.";
-		}
-		else if (whichResponse == 1)
-		{
-			response = "Hmmm.";
-		}
-		else if (whichResponse == 2)
-		{
-			response = "Do you really think so?";
-		}
-		else if (whichResponse == 3)
-		{
-			response = "You don't say.";
-		}
-		
-		return response;
+            final int NUMBER_OF_RESPONSES = 6;
+            double r = Math.random();
+            int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
+            String response = "";
+
+            if (whichResponse == 0)
+            {
+                    response = "Interesting, tell me more.";
+            }
+            else if (whichResponse == 1)
+            {
+                    response = "Hmmm.";
+            }
+            else if (whichResponse == 2)
+            {
+                    response = "Do you really think so?";
+            }
+            else if (whichResponse == 3)
+            {
+                    response = "You don't say.";
+            }
+            else if (whichResponse == 4)
+            {
+                    response = "Zowie! This is a hum-dinger of a conversation.";
+            }
+            else if (whichResponse == 5)
+            {
+                    response = "We're having a great, very human conversation.";
+            }                
+            return response;
 	}
 }
